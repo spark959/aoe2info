@@ -71,6 +71,62 @@
     </div>
   </div>
 
+  <div id="army">
+    <button @click="dispArmy">Make an Army</button>
+    <button @click="dispArmyList">View Available Armies</button>
+    <div v-if="displayArmy">
+      <input v-model="armyTitle" placeholder="Name of Army">
+      <label>Enter an Age of Empires II Unit to add to your army </label>
+      <input v-model="currUnit" placeholder="Name of Unit">
+      <input v-model="currQuant" placeholder="Quantity of Unit">
+      <br>
+      <button @click="addToArmy">Add to army</button>
+      <br>
+      <h3>{{armyTitle}}</h3>
+      <ul id="currArmy">
+        <li v-for="unit in armyArr">{{ unit.unitName }} x {{unit.quantity}}</li>
+      </ul>
+    </div>
+    <form v-if="displayArmy" v-on:submit.prevent="postArmy">
+      <button @click="postArmy">Submit Army</button>
+    </form>
+    <div v-if="displayArmyList">
+      <div class="form">
+         <input v-model="findTitle" placeholder="Search">
+         <div class="suggestions" v-if="suggestions.length > 0">
+           <div class="suggestion" v-for="s in suggestions" @click="selectArmy(s)">{{s.title}}
+           </div>
+         </div>
+         <div v-else>
+           <p>There are currently no armies</p>
+         </div>
+       </div>
+    </div>
+    <div class="indivArmy" v-if="findArmy">
+      <h3>{{findArmy.title}}</h3>
+      <button @click="editArmy">Edit Army</button>
+      <button @click="delArmy">Delete Army</button>
+      <br>
+      <div class="editStuff" v-if="edit">
+        <input v-model="findArmy.title">
+        <br>
+        <br>
+        <ul>
+          <li v-for="unit in findArmy.units">
+            <input v-model="unit.unitName"/> X
+            <input v-model="unit.quantity"/>
+            <button @click="deleteUnit(unit)">Remove</button>
+          </li>
+        </ul>
+        <button @click="putArmy(findArmy)">Submit Edit</button>
+      </div>
+      <div class="deleteStuff" v-if="del">
+        <button @click="deleteArmy(findArmy)">Delete Army Forever</button>
+      </div>
+      <button @click="doneWithCurrArmy">Done</button>
+    </div>
+  </div>
+
 </div>
 
   <footer>

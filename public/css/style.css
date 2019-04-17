@@ -45,7 +45,7 @@ ul {
 #unitManip {
   text-align: center;
   display: grid;
-  grid-template: auto auto auto auto auto/ 1fr 3fr;
+  grid-template: auto auto auto auto auto/ 1fr 2fr 1fr;
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   padding: 10px;
@@ -78,4 +78,20 @@ ul {
 footer a{
   text-decoration: none;
   color: #000000;
+}
+
+
+.suggestions {
+  width: 350px;
+  border: 1px solid #ccc;
+  margin-right: 0px;
+}
+
+.suggestion {
+  min-height: 20px;
+}
+
+.suggestion:hover {
+  background-color: #696969;
+  color: #fff;
 }
